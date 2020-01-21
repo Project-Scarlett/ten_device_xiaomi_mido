@@ -17,7 +17,6 @@
 //#define LOG_NDEBUG 0
 
 #define LOG_TAG "android.hardware.power@1.3-service.mido-libperfmgr"
-#define ATRACE_TAG (ATRACE_TAG_POWER | ATRACE_TAG_HAL)
 
 #include <fcntl.h>
 #include <poll.h>
@@ -109,7 +108,6 @@ void InteractionHandler::PerfLock() {
     if (!mHintManager->DoHint("INTERACTION")) {
         ALOGE("%s: do hint INTERACTION failed", __func__);
     }
-    ATRACE_INT("interaction_lock", 1);
 }
 
 void InteractionHandler::PerfRel() {
@@ -117,7 +115,6 @@ void InteractionHandler::PerfRel() {
     if (!mHintManager->EndHint("INTERACTION")) {
         ALOGE("%s: end hint INTERACTION failed", __func__);
     }
-    ATRACE_INT("interaction_lock", 0);
 }
 
 long long InteractionHandler::CalcTimespecDiffMs(struct timespec start,
@@ -129,7 +126,6 @@ long long InteractionHandler::CalcTimespecDiffMs(struct timespec start,
 }
 
 void InteractionHandler::Acquire(int32_t duration) {
-    ATRACE_CALL();
 
     std::lock_guard<std::mutex> lk(mLock);
     if (mState == INTERACTION_STATE_UNINITIALIZED) {
@@ -175,7 +171,6 @@ void InteractionHandler::Acquire(int32_t duration) {
 void InteractionHandler::Release() {
     std::lock_guard<std::mutex> lk(mLock);
     if (mState == INTERACTION_STATE_WAITING) {
-        ATRACE_CALL();
         PerfRel();
         mState = INTERACTION_STATE_IDLE;
     } else {
@@ -201,7 +196,6 @@ void InteractionHandler::WaitForIdle(int32_t wait_ms, int32_t timeout_ms) {
     ssize_t ret;
     struct pollfd pfd[2];
 
-    ATRACE_CALL();
 
     ALOGV("%s: wait:%d timeout:%d", __func__, wait_ms, timeout_ms);
 

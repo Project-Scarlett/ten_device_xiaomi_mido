@@ -133,8 +133,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.common@1.0 \
     vendor.qti.hardware.camera.device@1.0 \
     camera.msm8953 \
-    libmm-qcamera \
-    Snap
+    libmm-qcamera
 
 # Consumerir
 PRODUCT_PACKAGES += \
@@ -397,3 +396,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     WfdCommon
+
+# GCam Go
+PRODUCT_PACKAGES += \
+    GCam

@@ -236,3 +236,5 @@ BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
 # Inherit from the proprietary version
 -include vendor/xiaomi/mido/BoardConfigVendor.mk
 
+#TempHAX
+BUILD_BROKEN_DUP_RULES := true

@@ -21,28 +21,22 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from mido device
 $(call inherit-product, device/xiaomi/mido/device.mk)
 
-# Inherit some common Ancient ROM stuff.
-$(call inherit-product, vendor/ancient/config/common_full_phone.mk)
-
-# Gapps
-TARGET_GAPPS_ARCH := arm64
-IS_PHONE := true
+# Inherit some common Superior OS stuff.
+$(call inherit-product, vendor/superior/config/common.mk)
 
 # Bootanimation Resolution
 TARGET_BOOT_ANIMATION_RES := 1080
 
-# Some Extra's
-ANCIENT_OFFICIAL=true
+# Maintainer
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.superior.maintainer=Smokey
 
-# OTA for Vanilla Variant only
-FORCE_OTA=true
-
-# For Vanilla
-ANCIENT_NOGAPPS=true
+# Build Tag
+SUPERIOR_BUILD_TYPE := EOL
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mido
-PRODUCT_NAME := ancient_mido
+PRODUCT_NAME := superior_mido
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Redmi Note 4
 PRODUCT_MANUFACTURER := Xiaomi
